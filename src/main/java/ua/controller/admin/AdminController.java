@@ -16,4 +16,5 @@ public class AdminController {
 	public ItemFilter getFilter() {
 		return new ItemFilter();
 	}
+	
 }
