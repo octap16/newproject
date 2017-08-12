@@ -32,6 +32,7 @@ public class RegistrationController {
 		binder.setValidator(new UserValidator(userService));
 	}
 	
+	
 	@RequestMapping
 	public String registration(Model model) {
 		model.addAttribute("user", new User());

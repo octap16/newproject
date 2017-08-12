@@ -22,6 +22,7 @@ public class UserValidator implements Validator{
 		return clazz.equals(User.class);
 	}
 
+	
 	@Override
 	public void validate(Object target, Errors errors) {
 		User user = (User) target;
