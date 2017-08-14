@@ -36,8 +36,8 @@
             <label>
               Email Address<span class="req">*</span>
             </label>
-           <form:input path="email" type="email"  autocomplete="off"/>
-           <form:errors path="email"/>
+           <form:input path="email" type="email" id="email" autocomplete="off"/>
+        	 <label for="email"><form:errors path="email"/></label>
           </div>   
           <div class="field-wrap">
             <label>
@@ -63,7 +63,7 @@
             </label>
             <input  name="password" type="password"  autocomplete="off"/>
           </div>
-          <p class="forgot"><a href="#">Forgot Password?</a></p>
+          <p class="forgot"><a href="/reset">Forgot Password?</a></p>
           <button class="button button-block"/>Log In</button>  
           </form:form>
         </div>

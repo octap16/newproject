@@ -11,7 +11,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.entity.Role;
 import ua.entity.User;
-import ua.repository.ItemRepository;
 import ua.repository.UserRepository;
 import ua.service.UserService;
 
@@ -20,8 +19,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Autowired
 	private UserRepository userRepository;
-	@Autowired
-	private ItemRepository itemRepository;
+	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
 

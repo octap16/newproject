@@ -13,38 +13,55 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
 
+import ua.domain.JsonResponse;
 import ua.entity.User;
 import ua.service.UserService;
 import ua.validator.UserValidator;
-
 
 @Controller
 public class RegistrationController {
 	@Autowired
 	private UserService userService;
 	
+	
 	@InitBinder("user")
 	protected void initBinder(WebDataBinder binder) {
 		binder.setValidator(new UserValidator(userService));
 	}
-	
-	
 	@RequestMapping(value = "/registration", method = RequestMethod.GET)
 	public String registration(Model model) {
 		model.addAttribute("user", new User());
 		return "user-index";
 	}
+//	@RequestMapping(value="/registration",  method = RequestMethod.POST)
+//	public String registration(@ModelAttribute("user") @Valid User user,  BindingResult br, SessionStatus status, Model model) {
+//		if(br.hasErrors()){
+//			return "user-index";
+//		}
+//		userService.save(user);
+//		status.setComplete();
+//		return "redirect:/";
+//	}
 	@RequestMapping(value="/registration",  method = RequestMethod.POST)
-	public String registration(@ModelAttribute("user") @Valid User user,  BindingResult br, SessionStatus status, Model model) {
+	public @ResponseBody JsonResponse registration(@ModelAttribute("user") @Valid User user,  BindingResult br, SessionStatus status, Model model) {
+		JsonResponse res = new JsonResponse();
 		if(br.hasErrors()){
-			return "user-index";
+			res.setStatus("FAIL");
+			return res;
 		}
+		else{
+		res.setStatus("SUCCESS");
 		userService.save(user);
 		status.setComplete();
-		return "redirect:/";
+		return res;
+	}}
+	
+	@RequestMapping("/")
+	public String index() {
+		return "user-shoppingcart";
 	}
 
 }
